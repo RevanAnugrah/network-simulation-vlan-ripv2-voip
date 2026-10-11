@@ -13,8 +13,7 @@
 
 <br>
 
-<img width="960" height="353" alt="{CC8D8102-1449-4A16-941E-4AC47A48EC65}" src="https://github.com/user-attachments/assets/d2ec697a-8e35-4d41-b751-708756d64121" />
-
+<img src="images/topologi.png" alt="Network topology" width="100%">
 
 <sub>Full topology built in Cisco Packet Tracer</sub>
 
@@ -48,13 +47,12 @@ The four routers are linked in a **serial WAN ring** and share routes dynamicall
 
 ### Packet Tracer view
 
-<img width="960" height="353" alt="{CC8D8102-1449-4A16-941E-4AC47A48EC65}" src="https://github.com/user-attachments/assets/a1a14cff-95f5-4542-8417-b6db0f4e0650" />
+<img src="images/topologi.png" alt="Packet Tracer topology" width="100%">
 
 <details>
 <summary><b>🎨 Clean diagram view (click to expand)</b></summary>
 <br>
-<img width="1905" height="1084" alt="topologi-diagram" src="https://github.com/user-attachments/assets/37e32b74-40fe-4301-aea0-e0b19abe1b0c" />
-
+<img src="images/topologi-diagram.png" alt="Clean topology diagram" width="100%">
 </details>
 
 ### Logical view
@@ -142,7 +140,8 @@ graph LR
 | 7 | Set up the DNS server | Server0 |
 | 8 | Configure VoIP (telephony-service) | R-B-Cabang |
 | 9 | Configure wireless | 2 access points |
-| 10 | Save and verify | All devices |
+| 10 | Add the ACL | R-A-Utama |
+| 11 | Save and verify | All devices |
 
 <!-- Interface names and addresses follow the topology above. Adjust them if your own devices use different ports. -->
 
@@ -390,7 +389,25 @@ Then on each smartphone, laptop, and tablet open **Config > Wireless0**, enter t
 
 ---
 
-### 🔟 Save & Final Verification
+### 🔟 ACL (Standard Access List)
+
+Block one host (PC1) and allow everything else. A standard ACL filters by **source address only**.
+
+```
+access-list 1 deny host 192.44.30.3
+access-list 1 permit any
+!
+interface <interface>
+ ip access-group 1 <in|out>
+```
+
+> 💡 The last line `permit any` is required. Without it, the invisible *deny all* at the end of every ACL blocks all other traffic.
+
+✅ **Check:** `show access-lists` and ping from PC1 (blocked) and from PC0 (allowed)
+
+---
+
+### 1️⃣1️⃣ Save & Final Verification
 
 ```
 write memory
@@ -436,6 +453,10 @@ ip dhcp pool VLAN30
  network 192.44.30.0 255.255.255.0
  default-router 192.44.30.1
  dns-server 100.100.30.2
+!
+access-list 1 deny host 192.44.30.3
+access-list 1 permit any
+! TODO: apply with "ip access-group 1 in|out" on the correct interface
 !
 router rip
  version 2
@@ -759,11 +780,28 @@ write memory
 
 ## 🛡️ Access Control List
 
-<!-- TODO: fill in your real ACL, or delete this section -->
+A **standard ACL** on **R-A-Utama** blocks one host (**PC1**, `192.44.30.3`, VLAN 30) and lets every other host through.
 
-| ACL | Applied On | Purpose |
-|-----|------------|---------|
-| ... | 	R-A-Utama Fa0/0.30,out| PC1 (192.44.30.3)|
+| ACL | Type | Applied On | Purpose |
+|-----|:----:|------------|---------|
+| `1` | Standard | R-A-Utama <!-- TODO: add interface and direction, for example Se0/3/0 out --> | Denies host `192.44.30.3` (PC1) and permits all other traffic |
+
+**Rules** (`show access-lists`)
+
+```
+Standard IP access list 1
+    10 deny host 192.44.30.3
+    20 permit any
+```
+
+**Why `permit any` matters:** every ACL ends with an invisible *deny all*. Without line 20, all other traffic would be blocked too.
+
+**How to test**
+- Ping from **PC1** (`192.44.30.3`) to the other side: it should be **blocked**.
+- Ping from **PC0** or **PC2** to the same destination: it should **work**.
+- Run `show access-lists` again: the match counter on line 10 should increase after PC1's ping.
+
+---
 
 ## 🔧 Device Configurations
 
@@ -804,6 +842,7 @@ All device configs are in the [`configs/`](configs/) folder.
 | DHCP | Set a PC to DHCP | PC gets IP, gateway, and DNS |
 | Connectivity | `ping` between buildings | Replies from the other building and the server |
 | VoIP | Call between two IP Phones | Call connects between extensions |
+| ACL | Ping from PC1 (`192.44.30.3`), then from PC0 | PC1 is blocked, PC0 works |
 | DNS | Open the server name from a PC | Name resolves to the server IP |
 
 ## 📁 Repository Structure
