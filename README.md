@@ -763,7 +763,7 @@ write memory
 
 | ACL | Applied On | Purpose |
 |-----|------------|---------|
-| ... | 	R-A-Utama Fa0/0.30,out| PC1 (192.44.30.3) ...|
+| ... | 	R-A-Utama Fa0/0.30,out| PC1 (192.44.30.3)|
 
 ## 🔧 Device Configurations
 
