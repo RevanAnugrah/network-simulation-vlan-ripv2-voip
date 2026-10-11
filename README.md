@@ -27,7 +27,8 @@ The design covers:
 
 ## 🗺️ Network Topology
 
-![Network Topology](images/topologi.png)
+<img width="960" height="348" alt="{5D82E9A4-1E45-471A-B048-44D1E681ED82}" src="https://github.com/user-attachments/assets/15eeb415-3a96-4d20-a2a6-0978cca2289f" />
+
 
 ### Zones
 
