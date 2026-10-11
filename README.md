@@ -48,12 +48,13 @@ The four routers are linked in a **serial WAN ring** and share routes dynamicall
 
 ### Packet Tracer view
 
-<img src="images/topologi.png" alt="Packet Tracer topology" width="100%">
+<img width="960" height="353" alt="{CC8D8102-1449-4A16-941E-4AC47A48EC65}" src="https://github.com/user-attachments/assets/a1a14cff-95f5-4542-8417-b6db0f4e0650" />
 
 <details>
 <summary><b>🎨 Clean diagram view (click to expand)</b></summary>
 <br>
-<img src="images/topologi-diagram.png" alt="Clean topology diagram" width="100%">
+<img width="1905" height="1084" alt="topologi-diagram" src="https://github.com/user-attachments/assets/37e32b74-40fe-4301-aea0-e0b19abe1b0c" />
+
 </details>
 
 ### Logical view
