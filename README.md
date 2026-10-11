@@ -13,7 +13,8 @@
 
 <br>
 
-<img src="images/topologi.png" alt="Network topology" width="100%">
+<img width="960" height="353" alt="{CC8D8102-1449-4A16-941E-4AC47A48EC65}" src="https://github.com/user-attachments/assets/d2ec697a-8e35-4d41-b751-708756d64121" />
+
 
 <sub>Full topology built in Cisco Packet Tracer</sub>
 
