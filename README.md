@@ -13,7 +13,8 @@
 
 <br>
 
-<img width="953" height="351" alt="{57B174FA-D046-4C71-8E48-8E3351071CD6}" src="https://github.com/user-attachments/assets/458b0fa1-3b1f-4c21-b97d-2b00063d205d" />
+<img width="944" height="345" alt="{D18186E4-78AD-477F-B413-D2E4D8BC45C9}" src="https://github.com/user-attachments/assets/841a94f4-cfe6-424f-80fd-e155f37b5b53" />
+
 
 
 <sub>Full topology built in Cisco Packet Tracer</sub>
@@ -48,8 +49,7 @@ The four routers are linked in a **serial WAN ring** and share routes dynamicall
 
 ### Packet Tracer view
 
-<img width="953" height="351" alt="{57B174FA-D046-4C71-8E48-8E3351071CD6}" src="https://github.com/user-attachments/assets/5ae77071-04c7-4f09-b466-f7683db2639f" />
-
+<img width="944" height="345" alt="{D18186E4-78AD-477F-B413-D2E4D8BC45C9}" src="https://github.com/user-attachments/assets/064a1ea1-16fe-452e-8f49-b4c5e129ecf1" />
 
 <details>
 <summary><b>🎨 Clean diagram view (click to expand)</b></summary>
