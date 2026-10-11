@@ -13,7 +13,8 @@
 
 <br>
 
-<img src="images/topologi.png" alt="Network topology" width="100%">
+<img width="953" height="351" alt="{57B174FA-D046-4C71-8E48-8E3351071CD6}" src="https://github.com/user-attachments/assets/458b0fa1-3b1f-4c21-b97d-2b00063d205d" />
+
 
 <sub>Full topology built in Cisco Packet Tracer</sub>
 
@@ -47,12 +48,14 @@ The four routers are linked in a **serial WAN ring** and share routes dynamicall
 
 ### Packet Tracer view
 
-<img src="images/topologi.png" alt="Packet Tracer topology" width="100%">
+<img width="953" height="351" alt="{57B174FA-D046-4C71-8E48-8E3351071CD6}" src="https://github.com/user-attachments/assets/5ae77071-04c7-4f09-b466-f7683db2639f" />
+
 
 <details>
 <summary><b>🎨 Clean diagram view (click to expand)</b></summary>
 <br>
-<img src="images/topologi-diagram.png" alt="Clean topology diagram" width="100%">
+<img width="1905" height="1084" alt="topologi-diagram" src="https://github.com/user-attachments/assets/f3b51c08-7f27-4752-b479-81e7a110c7a3" />
+
 </details>
 
 ### Logical view
