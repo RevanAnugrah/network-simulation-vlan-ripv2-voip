@@ -1,0 +1,44 @@
+enable
+configure terminal
+hostname R-A-Utama
+no ip domain-lookup
+!
+interface FastEthernet0/0
+ no shutdown
+!
+interface FastEthernet0/0.30
+ description VLAN 30 - Data A Utama
+ encapsulation dot1Q 30
+ ip address 192.44.30.1 255.255.255.0
+!
+interface Serial0/3/0
+ description To R-B-Utama
+ ip address 188.55.30.1 255.255.255.252
+ clock rate 64000
+ no shutdown
+!
+interface Serial0/2/0
+ description To R-A-Cabang
+ ip address 192.88.30.1 255.255.255.252
+ clock rate 64000
+ no shutdown
+!
+ip dhcp excluded-address 192.44.30.1
+ip dhcp pool VLAN30
+ network 192.44.30.0 255.255.255.0
+ default-router 192.44.30.1
+ dns-server 100.100.30.2
+!
+access-list 1 deny host 192.44.30.3
+access-list 1 permit any
+! TODO: apply with "ip access-group 1 in|out" on the correct interface
+!
+router rip
+ version 2
+ no auto-summary
+ network 192.44.30.0
+ network 188.55.0.0
+ network 192.88.30.0
+!
+end
+write memory
