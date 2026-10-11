@@ -1,0 +1,17 @@
+enable
+configure terminal
+hostname SW-A-Utama
+!
+vlan 30
+ name DATA_A_UTAMA
+!
+interface FastEthernet0/1
+ description Trunk to R-A-Utama
+ switchport mode trunk
+!
+interface range FastEthernet0/2 - 4
+ switchport mode access
+ switchport access vlan 30
+!
+end
+write memory

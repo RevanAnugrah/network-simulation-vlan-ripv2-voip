@@ -1,0 +1,45 @@
+enable
+configure terminal
+hostname R-B-Utama
+no ip domain-lookup
+!
+interface FastEthernet0/0
+ no shutdown
+!
+interface FastEthernet0/0.10
+ description VLAN 10 - Printer
+ encapsulation dot1Q 10
+ ip address 192.29.30.1 255.255.255.0
+!
+interface FastEthernet0/0.11
+ description VLAN 11 - Server
+ encapsulation dot1Q 11
+ ip address 100.100.30.1 255.255.255.0
+!
+interface Serial0/2/0
+ description To R-A-Utama
+ ip address 188.55.30.2 255.255.255.252
+ no shutdown
+!
+interface Serial0/3/0
+ description To R-B-Cabang
+ ip address 192.66.30.1 255.255.255.252
+ clock rate 64000
+ no shutdown
+!
+ip dhcp excluded-address 192.29.30.1
+ip dhcp pool VLAN10
+ network 192.29.30.0 255.255.255.0
+ default-router 192.29.30.1
+ dns-server 100.100.30.2
+!
+router rip
+ version 2
+ no auto-summary
+ network 192.29.30.0
+ network 100.0.0.0
+ network 188.55.0.0
+ network 192.66.30.0
+!
+end
+write memory

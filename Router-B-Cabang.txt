@@ -1,0 +1,63 @@
+enable
+configure terminal
+hostname R-B-Cabang
+no ip domain-lookup
+!
+interface FastEthernet0/0
+ no shutdown
+!
+interface FastEthernet0/0.50
+ description VLAN 50 - Wireless B
+ encapsulation dot1Q 50
+ ip address 192.123.30.1 255.255.255.0
+!
+interface FastEthernet0/0.100
+ description VLAN 100 - Voice
+ encapsulation dot1Q 100
+ ip address 200.20.30.1 255.255.255.0
+!
+interface Serial0/2/0
+ description To R-A-Cabang
+ ip address 192.69.30.2 255.255.255.252
+ no shutdown
+!
+interface Serial0/3/0
+ description To R-B-Utama
+ ip address 192.66.30.2 255.255.255.252
+ no shutdown
+!
+ip dhcp excluded-address 192.123.30.1
+ip dhcp excluded-address 200.20.30.1
+ip dhcp pool VLAN50
+ network 192.123.30.0 255.255.255.0
+ default-router 192.123.30.1
+ dns-server 100.100.30.2
+ip dhcp pool VLAN100
+ network 200.20.30.0 255.255.255.0
+ default-router 200.20.30.1
+ dns-server 100.100.30.2
+ option 150 ip 200.20.30.1
+!
+telephony-service
+ max-ephones 3
+ max-dn 3
+ ip source-address 200.20.30.1 port 2000
+ auto assign 1 to 3
+!
+ephone-dn 1
+ number 101
+ephone-dn 2
+ number 102
+ephone-dn 3
+ number 103
+!
+router rip
+ version 2
+ no auto-summary
+ network 192.123.30.0
+ network 200.20.30.0
+ network 192.69.30.0
+ network 192.66.30.0
+!
+end
+write memory

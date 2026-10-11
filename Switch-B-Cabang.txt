@@ -1,0 +1,25 @@
+enable
+configure terminal
+hostname SW-B-Cabang
+!
+vlan 50
+ name WIRELESS_B
+vlan 100
+ name VOICE
+!
+interface GigabitEthernet0/1
+ description Trunk to R-B-Cabang
+ switchport mode trunk
+!
+interface GigabitEthernet0/2
+ description Access Point Gedung B
+ switchport mode access
+ switchport access vlan 50
+!
+interface range FastEthernet0/1 - 3
+ description IP Phones
+ switchport mode access
+ switchport access vlan 100
+!
+end
+write memory

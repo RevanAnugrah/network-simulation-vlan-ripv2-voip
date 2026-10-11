@@ -1,0 +1,25 @@
+enable
+configure terminal
+hostname SW-B-Utama
+!
+vlan 10
+ name PRINTER
+vlan 11
+ name SERVER
+!
+interface GigabitEthernet0/1
+ description Trunk to R-B-Utama
+ switchport mode trunk
+!
+interface FastEthernet0/1
+ description Printer0
+ switchport mode access
+ switchport access vlan 10
+!
+interface FastEthernet0/2
+ description Server0
+ switchport mode access
+ switchport access vlan 11
+!
+end
+write memory

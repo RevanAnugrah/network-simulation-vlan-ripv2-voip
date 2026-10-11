@@ -1,0 +1,24 @@
+enable
+configure terminal
+hostname SW-A-Cabang
+!
+vlan 20
+ name WIRELESS_A
+vlan 21
+ name DATA_A_CABANG
+!
+interface GigabitEthernet0/1
+ description Trunk to R-A-Cabang
+ switchport mode trunk
+!
+interface GigabitEthernet0/2
+ description Access Point Gedung A
+ switchport mode access
+ switchport access vlan 20
+!
+interface range FastEthernet0/1 - 3
+ switchport mode access
+ switchport access vlan 21
+!
+end
+write memory

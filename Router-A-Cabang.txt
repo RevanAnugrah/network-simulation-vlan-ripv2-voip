@@ -1,0 +1,50 @@
+enable
+configure terminal
+hostname R-A-Cabang
+no ip domain-lookup
+!
+interface FastEthernet0/1
+ no shutdown
+!
+interface FastEthernet0/1.20
+ description VLAN 20 - Wireless A
+ encapsulation dot1Q 20
+ ip address 198.32.30.1 255.255.255.0
+!
+interface FastEthernet0/1.21
+ description VLAN 21 - Data A Cabang
+ encapsulation dot1Q 21
+ ip address 197.73.30.1 255.255.255.0
+!
+interface Serial0/2/0
+ description To R-A-Utama
+ ip address 192.88.30.2 255.255.255.252
+ no shutdown
+!
+interface Serial0/3/0
+ description To R-B-Cabang
+ ip address 192.69.30.1 255.255.255.252
+ clock rate 64000
+ no shutdown
+!
+ip dhcp excluded-address 198.32.30.1
+ip dhcp excluded-address 197.73.30.1
+ip dhcp pool VLAN20
+ network 198.32.30.0 255.255.255.0
+ default-router 198.32.30.1
+ dns-server 100.100.30.2
+ip dhcp pool VLAN21
+ network 197.73.30.0 255.255.255.0
+ default-router 197.73.30.1
+ dns-server 100.100.30.2
+!
+router rip
+ version 2
+ no auto-summary
+ network 198.32.30.0
+ network 197.73.30.0
+ network 192.88.30.0
+ network 192.69.30.0
+!
+end
+write memory
